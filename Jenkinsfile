@@ -16,13 +16,31 @@ pipeline {
           }
         }
 
+        stage('Logging') {
+          steps {
+            echo 'Logging to File'
+            writeFile(file: 'LogsFile.txt', text: 'Logging everything')
+          }
+        }
+
       }
     }
 
     stage('Deploy') {
-      steps {
-        input(message: 'Ready to Deploy', id: 'OK')
-        echo 'Deploying to Server'
+      parallel {
+        stage('Deploy') {
+          steps {
+            input(message: 'Ready to Deploy', id: 'OK')
+            echo 'Deploying to Server'
+          }
+        }
+
+        stage('') {
+          steps {
+            archiveArtifacts 'LogsFile.txt'
+          }
+        }
+
       }
     }
 
