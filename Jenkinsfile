@@ -17,9 +17,8 @@ pipeline {
         }
 
         stage('Logging') {
-          
-          environment{
-          LocalVariable = "HelloLocal"
+          environment {
+            LocalVariable = 'HelloLocal'
           }
           steps {
             echo 'Logging to File'
@@ -39,7 +38,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('Archive Artifact') {
           steps {
             archiveArtifacts 'LogsFile.txt'
           }
