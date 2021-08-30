@@ -30,7 +30,11 @@ pipeline {
     }
 
     stage('Deploy') {
+    when{
+        branch 'master'
+       }
       parallel {
+
         stage('Deploy') {
           steps {
             input(message: 'Ready to Deploy', id: 'OK')
@@ -38,7 +42,7 @@ pipeline {
           }
         }
 
-        stage('Archive Artifact') {
+        stage('Archive Artifacts') {
           steps {
             archiveArtifacts 'LogsFile.txt'
           }
