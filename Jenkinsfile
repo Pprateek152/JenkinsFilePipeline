@@ -17,9 +17,13 @@ pipeline {
         }
 
         stage('Logging') {
+          
+          environment{
+          LocalVariable = "HelloLocal"
+          }
           steps {
             echo 'Logging to File'
-            writeFile(file: 'LogsFile.txt', text: 'Logging everything')
+            writeFile(file: 'LogsFile.txt', text: "Logging everything ${ChromeDriverPath} with local variable value ${LocalVariable}")
           }
         }
 
