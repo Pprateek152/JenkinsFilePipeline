@@ -21,6 +21,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
+        input(message: 'Ready to Deploy', id: 'OK')
         echo 'Deploying to Server'
       }
     }
