@@ -30,15 +30,18 @@ pipeline {
     }
 
     stage('Deploy') {
-    when{
+      when {
         branch 'master'
-       }
+      }
       parallel {
-
         stage('Deploy') {
           steps {
             input(message: 'Ready to Deploy', id: 'OK')
             echo 'Deploying to Server'
+            retry(count: 3) {
+              echo 'retry'
+            }
+
           }
         }
 
