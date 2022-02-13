@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'Ubuntu'
+    }
+
+  }
   stages {
     stage('Build') {
       parallel {
@@ -30,11 +35,10 @@ pipeline {
     }
 
     stage('Deploy') {
-    when{
+      when {
         branch 'master'
-       }
+      }
       parallel {
-
         stage('Deploy') {
           steps {
             input(message: 'Ready to Deploy', id: 'OK')
